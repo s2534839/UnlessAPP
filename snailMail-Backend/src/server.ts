@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import distanceRoutes from './routes/distance.js';
+import emailRoutes from './routes/email.js';
 
 // Load environment variables
 dotenv.config();
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.use('/api/distance', distanceRoutes);
+app.use('/api/email', emailRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {
@@ -32,9 +34,15 @@ app.get('/', (req, res) => {
     message: 'SnailMail Backend API',
     version: '1.0.0',
     endpoints: {
-      health: 'GET /api/distance/health',
-      calculate: 'POST /api/distance/calculate',
-      calculateAll: 'POST /api/distance/calculate-all',
+      distance: {
+        health: 'GET /api/distance/health',
+        calculate: 'POST /api/distance/calculate',
+        calculateAll: 'POST /api/distance/calculate-all',
+      },
+      email: {
+        health: 'GET /api/email/health',
+        send: 'POST /api/email/send',
+      },
     },
   });
 });
@@ -54,4 +62,5 @@ app.listen(PORT, () => {
   console.log(`📍 Frontend URL: ${FRONTEND_URL}`);
   console.log(`🗺️  Google Maps API: ${process.env.GOOGLE_MAPS_API_KEY ? '✓ Configured' : '✗ Not configured'}`);
   console.log(`🤖 Claude API: ${process.env.ANTHROPIC_API_KEY ? '✓ Configured' : '✗ Not configured'}`);
+  console.log(`📧 Email Service: ${process.env.EMAIL_USER && process.env.EMAIL_PASSWORD ? '✓ Configured' : '✗ Not configured'}`);
 });

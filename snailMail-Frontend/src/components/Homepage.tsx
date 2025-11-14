@@ -2,6 +2,8 @@ import { useState } from 'react';
 import './Homepage.css';
 import TransportMode from './TransportMode';
 import type { TransportType } from './TransportMode';
+import { apiService } from '../services/api';
+import type { DistanceResult } from '../services/api';
 
 interface TransportOption {
   type: TransportType;
@@ -46,61 +48,96 @@ const Homepage = () => {
   const [distance, setDistance] = useState<number>(0);
   const [deliveryTime, setDeliveryTime] = useState<string>('');
   const [showResults, setShowResults] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string>('');
+  const [distanceData, setDistanceData] = useState<DistanceResult | null>(null);
 
-  // Calculate random distance between 10-500 km for demo purposes
-  const calculateDistance = () => {
-    return Math.floor(Math.random() * 490) + 10;
-  };
-
-  const calculateDeliveryTime = (distanceKm: number, speedKmh: number) => {
-    const hours = distanceKm / speedKmh;
-
-    if (hours < 1) {
-      const minutes = Math.round(hours * 60);
-      return `${minutes} minutes`;
-    } else if (hours < 24) {
-      return `${Math.round(hours * 10) / 10} hours`;
-    } else {
-      const days = Math.round(hours / 24 * 10) / 10;
-      return `${days} days`;
-    }
-  };
-
-  const handleTransportSelect = (transport: TransportOption) => {
+  const handleTransportSelect = async (transport: TransportOption) => {
     if (!senderEmail || !recipientEmail || !senderLocation || !recipientLocation) {
       alert('Please fill in all fields before selecting a transport mode!');
       return;
     }
 
-    const dist = calculateDistance();
-    const time = calculateDeliveryTime(dist, transport.speed);
+    setLoading(true);
+    setError('');
 
-    setSelectedTransport(transport.type);
-    setDistance(dist);
-    setDeliveryTime(time);
-    setShowResults(true);
+    try {
+      // Call backend API to calculate distance
+      const response = await apiService.calculateDistance({
+        origin: { address: senderLocation },
+        destination: { address: recipientLocation },
+        mode: transport.type,
+      });
+
+      if (response.success && response.data) {
+        const data = response.data;
+        setDistanceData(data);
+        setSelectedTransport(transport.type);
+
+        // Convert distance from meters to km
+        const distanceKm = Math.round(data.distanceMeters / 1000);
+        setDistance(distanceKm);
+        setDeliveryTime(data.deliveryTimeText);
+        setShowResults(true);
+      } else {
+        setError('Failed to calculate distance. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error calculating distance:', err);
+      setError('Unable to connect to the server. Please make sure the backend is running on port 3001.');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSendEmail = () => {
-    if (!selectedTransport) {
+  const handleSendEmail = async () => {
+    if (!selectedTransport || !distanceData) {
       alert('Please select a transport mode first!');
       return;
     }
 
-    alert(`🎉 Email sent from ${senderEmail} to ${recipientEmail}!\n\nYour message will travel ${distance} km from ${senderLocation} to ${recipientLocation}.\n\nEstimated delivery time: ${deliveryTime}\n\nTransport mode: ${selectedTransport}`);
+    setLoading(true);
+    setError('');
 
-    // Reset form
-    setSenderEmail('');
-    setRecipientEmail('');
-    setSenderLocation('');
-    setRecipientLocation('');
-    setSelectedTransport(null);
-    setShowResults(false);
+    try {
+      // Call backend API to send email
+      const response = await apiService.sendEmail({
+        senderEmail,
+        recipientEmail,
+        senderLocation,
+        recipientLocation,
+        transportMode: selectedTransport,
+        deliveryTime,
+        distance: `${distance} km`,
+      });
+
+      if (response.success) {
+        alert(`🎉 Email sent from ${senderEmail} to ${recipientEmail}!\n\nYour message will travel ${distance} km from ${senderLocation} to ${recipientLocation}.\n\nEstimated delivery time: ${deliveryTime}\n\nTransport mode: ${selectedTransport}`);
+
+        // Reset form
+        setSenderEmail('');
+        setRecipientEmail('');
+        setSenderLocation('');
+        setRecipientLocation('');
+        setSelectedTransport(null);
+        setShowResults(false);
+        setDistanceData(null);
+      } else {
+        setError(response.error || 'Failed to send email. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error sending email:', err);
+      setError('Unable to send email. Please make sure the backend is running.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleReset = () => {
     setSelectedTransport(null);
     setShowResults(false);
+    setDistanceData(null);
+    setError('');
   };
 
   return (
@@ -177,6 +214,30 @@ const Homepage = () => {
               <p className="transport-hint">
                 Click on a transport mode to select it
               </p>
+              {error && (
+                <div className="error-message" style={{
+                  padding: '10px',
+                  marginBottom: '15px',
+                  backgroundColor: '#ff6b6b',
+                  color: 'white',
+                  borderRadius: '4px',
+                  textAlign: 'center'
+                }}>
+                  ⚠️ {error}
+                </div>
+              )}
+              {loading && (
+                <div className="loading-message" style={{
+                  padding: '10px',
+                  marginBottom: '15px',
+                  backgroundColor: '#4ecdc4',
+                  color: 'white',
+                  borderRadius: '4px',
+                  textAlign: 'center'
+                }}>
+                  ⏳ Calculating distance...
+                </div>
+              )}
               <div className="transport-grid">
                 {transportOptions.map((transport) => (
                   <div
@@ -184,7 +245,8 @@ const Homepage = () => {
                     className={`transport-wrapper ${
                       selectedTransport === transport.type ? 'selected' : ''
                     }`}
-                    onClick={() => handleTransportSelect(transport)}
+                    onClick={() => !loading && handleTransportSelect(transport)}
+                    style={{ opacity: loading ? 0.5 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
                   >
                     <TransportMode
                       type={transport.type}
