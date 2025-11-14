@@ -1,34 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import TransportMode from './components/TransportMode'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <header className="app-header">
+        <h1 className="app-title">SnailMail Transport Modes</h1>
+        <p className="app-subtitle">Choose your delivery method - the slower, the better!</p>
+      </header>
+
+      <div className="transport-grid">
+        <TransportMode
+          type="walking"
+          speed="5 km/h"
+          description="The classic approach. Your message walks to its destination, one step at a time."
+        />
+
+        <TransportMode
+          type="swimming"
+          speed="3 km/h"
+          description="For water-based delivery. Your message swims across rivers, lakes, and oceans."
+        />
+
+        <TransportMode
+          type="pigeon"
+          speed="80 km/h"
+          description="Air mail at its finest! A trusty pigeon carries your message through the skies."
+        />
+
+        <TransportMode
+          type="rock-climbing"
+          speed="1 km/h"
+          description="The most adventurous route. Your message climbs mountains to reach its destination."
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+      <footer className="app-footer">
+        <p>Because sometimes, anticipation is better than instant gratification.</p>
+      </footer>
+    </div>
   )
 }
 

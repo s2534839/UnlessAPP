@@ -1,0 +1,766 @@
+.transport-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  min-width: 300px;
+  max-width: 350px;
+}
+
+.transport-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.transport-title {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-transform: capitalize;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.animation-container {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+}
+
+.transport-info {
+  color: #fff;
+  text-align: left;
+}
+
+.transport-speed {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.transport-description {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+/* ==================== WALKING ANIMATION ==================== */
+
+.walking-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.walker {
+  position: absolute;
+  bottom: 30px;
+  left: 10%;
+  animation: walk 4s linear infinite;
+}
+
+@keyframes walk {
+  0% { left: 10%; }
+  100% { left: 85%; }
+}
+
+.walker-body {
+  position: relative;
+  width: 40px;
+  height: 60px;
+}
+
+.walker-head {
+  width: 20px;
+  height: 20px;
+  background: #ff6b6b;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 10px;
+}
+
+.walker-torso {
+  width: 15px;
+  height: 25px;
+  background: #4ecdc4;
+  position: absolute;
+  top: 22px;
+  left: 12.5px;
+  border-radius: 5px;
+}
+
+.walker-arm {
+  width: 5px;
+  height: 20px;
+  background: #4ecdc4;
+  position: absolute;
+  top: 25px;
+  border-radius: 3px;
+}
+
+.walker-arm-left {
+  left: 5px;
+  animation: arm-swing-left 0.6s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.walker-arm-right {
+  right: 5px;
+  animation: arm-swing-right 0.6s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes arm-swing-left {
+  0%, 100% { transform: rotate(-30deg); }
+  50% { transform: rotate(30deg); }
+}
+
+@keyframes arm-swing-right {
+  0%, 100% { transform: rotate(30deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+.walker-leg {
+  width: 5px;
+  height: 20px;
+  background: #2c3e50;
+  position: absolute;
+  top: 47px;
+  border-radius: 3px;
+}
+
+.walker-leg-left {
+  left: 13px;
+  animation: leg-walk-left 0.6s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.walker-leg-right {
+  right: 13px;
+  animation: leg-walk-right 0.6s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes leg-walk-left {
+  0%, 100% { transform: rotate(30deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+@keyframes leg-walk-right {
+  0%, 100% { transform: rotate(-30deg); }
+  50% { transform: rotate(30deg); }
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to bottom, #8b7355, #6b5345);
+  border-radius: 0 0 15px 15px;
+}
+
+/* ==================== SWIMMING ANIMATION ==================== */
+
+.swimming-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #3498db 0%, #2980b9 100%);
+  border-radius: 15px;
+}
+
+.swimmer {
+  position: absolute;
+  top: 50%;
+  left: 20%;
+  transform: translateY(-50%);
+  animation: swim 3s ease-in-out infinite;
+}
+
+@keyframes swim {
+  0%, 100% {
+    left: 20%;
+    transform: translateY(-50%) rotate(0deg);
+  }
+  50% {
+    left: 70%;
+    transform: translateY(-50%) rotate(5deg);
+  }
+}
+
+.swimmer-body {
+  position: relative;
+  width: 50px;
+  height: 40px;
+}
+
+.swimmer-head {
+  width: 18px;
+  height: 18px;
+  background: #ffb6b9;
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 30px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.swimmer-torso {
+  width: 25px;
+  height: 20px;
+  background: #f67280;
+  position: absolute;
+  top: 12px;
+  left: 10px;
+  border-radius: 8px;
+  transform: rotate(-5deg);
+}
+
+.swimmer-arm {
+  width: 4px;
+  height: 18px;
+  background: #f67280;
+  position: absolute;
+  border-radius: 2px;
+}
+
+.swimmer-arm-left {
+  top: 15px;
+  left: 5px;
+  animation: swim-arm-left 1s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.swimmer-arm-right {
+  top: 15px;
+  left: 32px;
+  animation: swim-arm-right 1s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes swim-arm-left {
+  0%, 100% { transform: rotate(45deg); }
+  50% { transform: rotate(-120deg); }
+}
+
+@keyframes swim-arm-right {
+  0%, 100% { transform: rotate(-45deg); }
+  50% { transform: rotate(120deg); }
+}
+
+.swimmer-leg {
+  width: 4px;
+  height: 15px;
+  background: #355c7d;
+  position: absolute;
+  top: 28px;
+  border-radius: 2px;
+}
+
+.swimmer-leg-left {
+  left: 15px;
+  animation: swim-kick-left 1s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.swimmer-leg-right {
+  left: 20px;
+  animation: swim-kick-right 1s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes swim-kick-left {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(-20deg); }
+}
+
+@keyframes swim-kick-right {
+  0%, 100% { transform: rotate(-20deg); }
+  50% { transform: rotate(20deg); }
+}
+
+.water-splash {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  top: 15px;
+  left: 45px;
+  animation: splash 1s ease-in-out infinite;
+}
+
+@keyframes splash {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.5);
+  }
+}
+
+.waves {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+}
+
+.wave-1 {
+  animation: wave-move 2s ease-in-out infinite;
+}
+
+.wave-2 {
+  animation: wave-move 2s ease-in-out infinite 0.7s;
+}
+
+.wave-3 {
+  animation: wave-move 2s ease-in-out infinite 1.4s;
+}
+
+@keyframes wave-move {
+  0%, 100% { transform: translateX(-100%); }
+  50% { transform: translateX(100%); }
+}
+
+/* ==================== PIGEON ANIMATION ==================== */
+
+.pigeon-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #87ceeb 0%, #b0e0e6 100%);
+  border-radius: 15px;
+}
+
+.pigeon {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  animation: fly 5s ease-in-out infinite;
+}
+
+@keyframes fly {
+  0%, 100% {
+    left: 10%;
+    top: 30%;
+  }
+  25% {
+    left: 35%;
+    top: 20%;
+  }
+  50% {
+    left: 60%;
+    top: 35%;
+  }
+  75% {
+    left: 80%;
+    top: 25%;
+  }
+}
+
+.pigeon-body {
+  position: relative;
+  width: 40px;
+  height: 30px;
+  animation: bob 0.5s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.pigeon-head {
+  width: 15px;
+  height: 15px;
+  background: #8b7d6b;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 25px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.pigeon-head::after {
+  content: '';
+  width: 6px;
+  height: 4px;
+  background: #ff9500;
+  position: absolute;
+  top: 8px;
+  right: -5px;
+  border-radius: 0 2px 2px 0;
+}
+
+.pigeon-torso {
+  width: 25px;
+  height: 20px;
+  background: #a8a8a8;
+  position: absolute;
+  top: 8px;
+  left: 5px;
+  border-radius: 60% 40% 40% 60%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.pigeon-wing {
+  width: 20px;
+  height: 12px;
+  background: #787878;
+  position: absolute;
+  top: 12px;
+  border-radius: 50%;
+}
+
+.pigeon-wing-left {
+  left: -5px;
+  animation: flap-left 0.3s ease-in-out infinite;
+  transform-origin: right center;
+}
+
+.pigeon-wing-right {
+  right: -5px;
+  animation: flap-right 0.3s ease-in-out infinite;
+  transform-origin: left center;
+}
+
+@keyframes flap-left {
+  0%, 100% { transform: rotate(-20deg) scaleY(1); }
+  50% { transform: rotate(-50deg) scaleY(1.2); }
+}
+
+@keyframes flap-right {
+  0%, 100% { transform: rotate(20deg) scaleY(1); }
+  50% { transform: rotate(50deg) scaleY(1.2); }
+}
+
+.pigeon-tail {
+  width: 12px;
+  height: 8px;
+  background: #6b6b6b;
+  position: absolute;
+  top: 15px;
+  left: 0;
+  border-radius: 0 0 50% 50%;
+  transform: rotate(-15deg);
+}
+
+.clouds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.cloud {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cloud::before,
+.cloud::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+}
+
+.cloud-1 {
+  width: 50px;
+  height: 20px;
+  top: 15%;
+  left: 60%;
+  animation: cloud-drift-1 15s linear infinite;
+}
+
+.cloud-1::before {
+  width: 30px;
+  height: 30px;
+  top: -15px;
+  left: 10px;
+}
+
+.cloud-1::after {
+  width: 25px;
+  height: 25px;
+  top: -10px;
+  right: 10px;
+}
+
+.cloud-2 {
+  width: 40px;
+  height: 18px;
+  top: 60%;
+  left: 20%;
+  animation: cloud-drift-2 20s linear infinite;
+}
+
+.cloud-2::before {
+  width: 25px;
+  height: 25px;
+  top: -12px;
+  left: 8px;
+}
+
+.cloud-2::after {
+  width: 20px;
+  height: 20px;
+  top: -8px;
+  right: 8px;
+}
+
+.cloud-3 {
+  width: 35px;
+  height: 15px;
+  top: 75%;
+  left: 75%;
+  animation: cloud-drift-3 18s linear infinite;
+}
+
+.cloud-3::before {
+  width: 20px;
+  height: 20px;
+  top: -10px;
+  left: 7px;
+}
+
+.cloud-3::after {
+  width: 18px;
+  height: 18px;
+  top: -7px;
+  right: 7px;
+}
+
+@keyframes cloud-drift-1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-400px); }
+}
+
+@keyframes cloud-drift-2 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-450px); }
+}
+
+@keyframes cloud-drift-3 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-500px); }
+}
+
+/* ==================== ROCK CLIMBING ANIMATION ==================== */
+
+.climbing-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8b4513 0%, #d2691e 50%, #cd853f 100%);
+  border-radius: 15px;
+}
+
+.cliff {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rock {
+  position: absolute;
+  background: rgba(105, 105, 105, 0.5);
+  border-radius: 50%;
+  box-shadow: inset -3px -3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.rock-1 {
+  width: 30px;
+  height: 30px;
+  top: 25%;
+  left: 30%;
+}
+
+.rock-2 {
+  width: 25px;
+  height: 25px;
+  top: 45%;
+  left: 60%;
+}
+
+.rock-3 {
+  width: 28px;
+  height: 28px;
+  top: 65%;
+  left: 35%;
+}
+
+.rock-4 {
+  width: 22px;
+  height: 22px;
+  top: 85%;
+  left: 55%;
+}
+
+.climber {
+  position: absolute;
+  bottom: 10%;
+  left: 45%;
+  animation: climb-up 6s ease-in-out infinite;
+}
+
+@keyframes climb-up {
+  0% {
+    bottom: 10%;
+    left: 45%;
+  }
+  25% {
+    bottom: 30%;
+    left: 50%;
+  }
+  50% {
+    bottom: 50%;
+    left: 55%;
+  }
+  75% {
+    bottom: 70%;
+    left: 48%;
+  }
+  100% {
+    bottom: 10%;
+    left: 45%;
+  }
+}
+
+.climber-body {
+  position: relative;
+  width: 35px;
+  height: 50px;
+}
+
+.climber-head {
+  width: 16px;
+  height: 16px;
+  background: #ff6f61;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.climber-head::after {
+  content: '';
+  width: 18px;
+  height: 10px;
+  background: #ff4444;
+  position: absolute;
+  top: -5px;
+  left: -1px;
+  border-radius: 50% 50% 0 0;
+}
+
+.climber-torso {
+  width: 14px;
+  height: 20px;
+  background: #6a5acd;
+  position: absolute;
+  top: 18px;
+  left: 11px;
+  border-radius: 4px;
+}
+
+.climber-arm {
+  width: 4px;
+  height: 16px;
+  background: #6a5acd;
+  position: absolute;
+  border-radius: 2px;
+}
+
+.climber-arm-left {
+  top: 20px;
+  left: 6px;
+  animation: climb-reach-left 2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.climber-arm-right {
+  top: 20px;
+  right: 6px;
+  animation: climb-reach-right 2s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes climb-reach-left {
+  0%, 100% { transform: rotate(-45deg) translateY(-8px); }
+  50% { transform: rotate(-90deg) translateY(-12px); }
+}
+
+@keyframes climb-reach-right {
+  0%, 100% { transform: rotate(90deg) translateY(-12px); }
+  50% { transform: rotate(45deg) translateY(-8px); }
+}
+
+.climber-leg {
+  width: 4px;
+  height: 16px;
+  background: #2f4f4f;
+  position: absolute;
+  border-radius: 2px;
+}
+
+.climber-leg-left {
+  top: 38px;
+  left: 12px;
+  animation: climb-step-left 2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.climber-leg-right {
+  top: 38px;
+  right: 12px;
+  animation: climb-step-right 2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes climb-step-left {
+  0%, 100% { transform: rotate(20deg); }
+  50% { transform: rotate(-30deg); }
+}
+
+@keyframes climb-step-right {
+  0%, 100% { transform: rotate(-30deg); }
+  50% { transform: rotate(20deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .transport-card {
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+
+  .animation-container {
+    height: 180px;
+  }
+}
