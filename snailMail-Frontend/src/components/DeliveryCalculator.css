@@ -1,0 +1,249 @@
+.delivery-calculator {
+  min-height: 100vh;
+  background: #1a1a2e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+  font-family: 'Press Start 2P', cursive, system-ui;
+}
+
+.calculator-header {
+  text-align: center;
+  color: #ffd700;
+  margin-bottom: 3rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.calculator-title {
+  font-size: 4rem;
+  margin: 0;
+  text-shadow: 4px 4px 0px #2d1b00;
+  animation: bounce 2s infinite;
+  color: #ffd700;
+}
+
+.calculator-subtitle {
+  font-size: 1.5rem;
+  margin: 1rem 0 0.5rem;
+  font-weight: 600;
+  color: #ffed4e;
+}
+
+.calculator-tagline {
+  font-size: 1.1rem;
+  margin: 0;
+  opacity: 0.9;
+  font-style: normal;
+  color: #a8dadc;
+}
+
+.calculator-form-container {
+  background: #0f0f1e;
+  border: 3px solid #ffd700;
+  box-shadow: 8px 8px 0px #2d1b00;
+  padding: 3rem;
+  max-width: 600px;
+  width: 100%;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.calculator-form {
+  width: 100%;
+}
+
+.form-section {
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: #ffd700;
+  margin: 0 0 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 2px 2px 0px #2d1b00;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: #ffed4e;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.input-field {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: 'Press Start 2P', cursive, system-ui;
+  background: #1a1a2e;
+  color: #a8dadc;
+  border: 3px solid #ffd700;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  box-shadow: 4px 4px 0px #2d1b00;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: #ffed4e;
+  box-shadow: 4px 4px 0px #50c878;
+  transform: translate(-2px, -2px);
+}
+
+.input-field:disabled {
+  background-color: #2a2a3e;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.error-message {
+  background: #3d1a1a;
+  border: 3px solid #ff4444;
+  box-shadow: 4px 4px 0px #2d1b00;
+  padding: 1rem;
+  margin: 1rem 0;
+  color: #ff6b6b;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.error-icon {
+  font-size: 1.5rem;
+}
+
+.calculate-button {
+  width: 100%;
+  padding: 1.2rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  font-family: 'Press Start 2P', cursive, system-ui;
+  background: #0f0f1e;
+  color: #ffd700;
+  border: 3px solid #ffd700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 8px 8px 0px #2d1b00;
+}
+
+.calculate-button:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0px #2d1b00;
+  background: #ffd700;
+  color: #0f0f1e;
+}
+
+.calculate-button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px #2d1b00;
+}
+
+.calculate-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 215, 0, 0.3);
+  border-top-color: #ffd700;
+  border-radius: 0;
+  animation: spin 0.8s linear infinite;
+  image-rendering: pixelated;
+}
+
+.form-hint {
+  text-align: center;
+  color: #a8dadc;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+  font-style: normal;
+  line-height: 1.6;
+}
+
+.calculator-footer {
+  text-align: center;
+  color: #ffd700;
+  margin-top: 3rem;
+  opacity: 0.9;
+}
+
+.calculator-footer p {
+  margin: 0.5rem 0;
+  color: #a8dadc;
+}
+
+.footer-tech {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  color: #ffed4e;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .calculator-title {
+    font-size: 3rem;
+  }
+
+  .calculator-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .calculator-form-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}

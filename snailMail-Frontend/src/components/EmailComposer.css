@@ -1,0 +1,251 @@
+.email-composer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.email-composer {
+  background: #0f0f1e;
+  border: 3px solid #ffd700;
+  box-shadow: 12px 12px 0px #2d1b00;
+  padding: 2rem;
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease-out;
+}
+
+.composer-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #ffd700;
+}
+
+.composer-title {
+  font-size: 2rem;
+  color: #ffd700;
+  margin: 0 0 0.5rem;
+  font-family: 'Press Start 2P', cursive, system-ui;
+  text-shadow: 2px 2px 0px #2d1b00;
+}
+
+.composer-subtitle {
+  font-size: 1rem;
+  color: #a8dadc;
+  margin: 0;
+}
+
+.delivery-info-banner {
+  background: #1a1a2e;
+  padding: 1rem;
+  border: 3px solid #ffd700;
+  box-shadow: 4px 4px 0px #2d1b00;
+  margin-bottom: 2rem;
+  color: #a8dadc;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-around;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.info-label {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-weight: 600;
+  color: #ffed4e;
+}
+
+.info-value {
+  font-size: 1rem;
+  color: #a8dadc;
+}
+
+.info-value.highlight {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffd700;
+}
+
+.composer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-field label {
+  font-weight: 600;
+  color: #ffed4e;
+  font-size: 0.95rem;
+}
+
+.form-field input,
+.form-field textarea {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-family: 'Press Start 2P', cursive, system-ui;
+  background: #1a1a2e;
+  color: #a8dadc;
+  border: 3px solid #ffd700;
+  transition: all 0.3s ease;
+  box-shadow: 4px 4px 0px #2d1b00;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+  outline: none;
+  border-color: #ffed4e;
+  box-shadow: 4px 4px 0px #50c878;
+  transform: translate(-1px, -1px);
+}
+
+.form-field input.error,
+.form-field textarea.error {
+  border-color: #ff4444;
+  box-shadow: 4px 4px 0px #ff4444;
+}
+
+.field-error {
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.form-field textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.composer-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.cancel-button,
+.send-button {
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Press Start 2P', cursive, system-ui;
+  border: 3px solid;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 6px 6px 0px #2d1b00;
+}
+
+.cancel-button {
+  background: #1a1a2e;
+  color: #a8dadc;
+  border-color: #a8dadc;
+}
+
+.cancel-button:hover {
+  background: #a8dadc;
+  color: #0f0f1e;
+  transform: translate(-1px, -1px);
+  box-shadow: 7px 7px 0px #2d1b00;
+}
+
+.send-button {
+  background: #0f0f1e;
+  color: #ffd700;
+  border-color: #ffd700;
+}
+
+.send-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #2d1b00;
+  background: #ffd700;
+  color: #0f0f1e;
+}
+
+.send-button:active,
+.cancel-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0px #2d1b00;
+}
+
+.composer-footer {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 3px solid #ffd700;
+  text-align: center;
+}
+
+.composer-footer p {
+  margin: 0;
+  color: #ffed4e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .delivery-info-banner {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .composer-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cancel-button,
+  .send-button {
+    width: 100%;
+  }
+}

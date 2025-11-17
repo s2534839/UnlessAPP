@@ -1,0 +1,245 @@
+.email-delivery-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.email-delivery-container {
+  background: #0f0f1e;
+  border: 3px solid #ffd700;
+  box-shadow: 12px 12px 0px #2d1b00;
+  padding: 2.5rem;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: zoomIn 0.4s ease-out;
+}
+
+.delivery-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.delivery-title {
+  font-size: 2.5rem;
+  color: #ffd700;
+  margin: 0 0 0.5rem;
+  font-family: 'Press Start 2P', cursive, system-ui;
+  text-shadow: 4px 4px 0px #2d1b00;
+}
+
+.delivery-subtitle {
+  font-size: 1.1rem;
+  color: #a8dadc;
+  margin: 0;
+}
+
+.transport-visualization {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.progress-section {
+  margin: 2rem 0;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 40px;
+  background: #1a1a2e;
+  border: 3px solid #ffd700;
+  box-shadow: 4px 4px 0px #2d1b00;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  transition: width 0.5s ease-out;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+  background: #ffd700;
+  border-right: 3px solid #ffed4e;
+}
+
+.progress-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 237, 78, 0.5), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.progress-percentage {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffd700;
+  margin-top: 1rem;
+  font-family: 'Press Start 2P', cursive, system-ui;
+  text-shadow: 2px 2px 0px #2d1b00;
+}
+
+.delivery-details {
+  margin: 2rem 0;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.detail-box {
+  background: #1a1a2e;
+  padding: 1.5rem;
+  border: 3px solid #ffd700;
+  box-shadow: 4px 4px 0px #2d1b00;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.detail-icon {
+  font-size: 2rem;
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 0.85rem;
+  color: #ffed4e;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.detail-value {
+  font-size: 1.1rem;
+  color: #a8dadc;
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.speed-notice {
+  background: #ffd700;
+  padding: 1.5rem;
+  border: 3px solid #2d1b00;
+  box-shadow: 6px 6px 0px #2d1b00;
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.notice-icon {
+  font-size: 2rem;
+}
+
+.speed-notice p {
+  margin: 0;
+  color: #0f0f1e;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.status-message {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 3px solid #ffd700;
+}
+
+.transit-message,
+.success-message,
+.error-message {
+  font-size: 1.1rem;
+  margin: 0;
+  padding: 1rem;
+  border: 3px solid;
+  box-shadow: 4px 4px 0px #2d1b00;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+.transit-message {
+  background: #1a2a3d;
+  color: #4a90e2;
+  border-color: #4a90e2;
+}
+
+.success-message {
+  background: #1a3d1a;
+  color: #50c878;
+  border-color: #50c878;
+}
+
+.error-message {
+  background: #3d1a1a;
+  color: #ff6b6b;
+  border-color: #ff4444;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .delivery-title {
+    font-size: 2rem;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .email-delivery-container {
+    padding: 1.5rem;
+  }
+}

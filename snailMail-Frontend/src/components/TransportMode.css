@@ -1,0 +1,930 @@
+/* Base pixel unit for consistent sizing */
+:root {
+  --pixel: 4px;
+}
+
+/* Card Styling - Pixel Art Border */
+.transport-card {
+  background: #0f0f1e;
+  border: 4px solid #ffd700;
+  border-radius: 0;
+  padding: 1.5rem;
+  margin: 1rem;
+  box-shadow:
+    8px 8px 0px #2d1b00,
+    8px 8px 0px 4px #ffd700;
+  transition: transform 0.1s ease;
+  min-width: 300px;
+  max-width: 350px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.transport-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow:
+    12px 12px 0px #2d1b00,
+    12px 12px 0px 4px #ffd700;
+}
+
+.transport-title {
+  color: #ffd700;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  font-weight: normal;
+  text-shadow: 2px 2px 0px #2d1b00;
+  font-family: 'Press Start 2P', cursive;
+  line-height: 1.6;
+}
+
+.animation-container {
+  background: #1a1a2e;
+  border: 3px solid #2d1b00;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.transport-info {
+  color: #a8dadc;
+  text-align: left;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.transport-speed {
+  font-size: 0.6rem;
+  margin: 0.8rem 0;
+  line-height: 1.4;
+  color: #50c878;
+}
+
+.transport-speed strong {
+  color: #ffd700;
+}
+
+.transport-description {
+  font-size: 0.5rem;
+  opacity: 0.9;
+  margin: 0.8rem 0;
+  line-height: 1.4;
+}
+
+/* ==================== WALKING ANIMATION - PIXEL ART ==================== */
+
+.walking-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #87ceeb 0%, #87ceeb 60%, #50c878 60%, #50c878 100%);
+}
+
+/* Ground with pixel grass */
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40%;
+  background: #50c878;
+  border: none;
+}
+
+.ground::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background:
+    linear-gradient(90deg,
+      #2d5016 0%, #2d5016 10%,
+      transparent 10%, transparent 15%,
+      #2d5016 15%, #2d5016 20%,
+      transparent 20%, transparent 30%,
+      #2d5016 30%, #2d5016 35%,
+      transparent 35%, transparent 45%,
+      #2d5016 45%, #2d5016 50%,
+      transparent 50%
+    );
+}
+
+/* Pixel art walker */
+.walker {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  width: 32px;
+  height: 48px;
+  animation: walk-move 5s linear infinite;
+}
+
+@keyframes walk-move {
+  0% { left: 20px; }
+  100% { left: calc(100% - 52px); }
+}
+
+.walker-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: walk-bob 0.4s steps(2) infinite;
+}
+
+@keyframes walk-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Pixel head using box-shadow */
+.walker-head {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #ffdbac;
+  top: 8px;
+  left: 14px;
+  box-shadow:
+    var(--pixel) 0 0 #ffdbac,
+    calc(var(--pixel) * 2) 0 0 #ffdbac,
+    0 var(--pixel) 0 #ffdbac,
+    var(--pixel) var(--pixel) 0 #ffdbac,
+    calc(var(--pixel) * 2) var(--pixel) 0 #ffdbac,
+    0 calc(var(--pixel) * 2) 0 #ffdbac,
+    var(--pixel) calc(var(--pixel) * 2) 0 #2d1b00,
+    calc(var(--pixel) * 2) calc(var(--pixel) * 2) 0 #ffdbac;
+}
+
+/* Pixel body */
+.walker-torso {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #4a90e2;
+  top: 20px;
+  left: 14px;
+  box-shadow:
+    var(--pixel) 0 0 #4a90e2,
+    calc(var(--pixel) * 2) 0 0 #4a90e2,
+    0 var(--pixel) 0 #4a90e2,
+    var(--pixel) var(--pixel) 0 #4a90e2,
+    calc(var(--pixel) * 2) var(--pixel) 0 #4a90e2,
+    0 calc(var(--pixel) * 2) 0 #4a90e2,
+    var(--pixel) calc(var(--pixel) * 2) 0 #4a90e2,
+    calc(var(--pixel) * 2) calc(var(--pixel) * 2) 0 #4a90e2;
+}
+
+/* Pixel arms */
+.walker-arm {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #ffdbac;
+  top: 22px;
+}
+
+.walker-arm-left {
+  left: 10px;
+  animation: arm-swing-pixel-left 0.4s steps(2) infinite;
+  box-shadow:
+    0 var(--pixel) 0 #ffdbac,
+    0 calc(var(--pixel) * 2) 0 #ffdbac;
+}
+
+.walker-arm-right {
+  right: 10px;
+  animation: arm-swing-pixel-right 0.4s steps(2) infinite;
+  box-shadow:
+    0 var(--pixel) 0 #ffdbac,
+    0 calc(var(--pixel) * 2) 0 #ffdbac;
+}
+
+@keyframes arm-swing-pixel-left {
+  0%, 100% { transform: translateY(2px); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes arm-swing-pixel-right {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(2px); }
+}
+
+/* Pixel legs */
+.walker-leg {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #2d1b00;
+  top: 32px;
+}
+
+.walker-leg-left {
+  left: 12px;
+  animation: leg-walk-pixel-left 0.4s steps(2) infinite;
+  box-shadow:
+    0 var(--pixel) 0 #2d1b00,
+    0 calc(var(--pixel) * 2) 0 #2d1b00,
+    0 calc(var(--pixel) * 3) 0 #2d1b00;
+}
+
+.walker-leg-right {
+  right: 12px;
+  animation: leg-walk-pixel-right 0.4s steps(2) infinite;
+  box-shadow:
+    0 var(--pixel) 0 #2d1b00,
+    0 calc(var(--pixel) * 2) 0 #2d1b00,
+    0 calc(var(--pixel) * 3) 0 #2d1b00;
+}
+
+@keyframes leg-walk-pixel-left {
+  0%, 100% { transform: translateY(2px) translateX(-2px); }
+  50% { transform: translateY(-2px) translateX(2px); }
+}
+
+@keyframes leg-walk-pixel-right {
+  0%, 100% { transform: translateY(-2px) translateX(2px); }
+  50% { transform: translateY(2px) translateX(-2px); }
+}
+
+/* ==================== SWIMMING ANIMATION - PIXEL ART ==================== */
+
+.swimming-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #4a90e2;
+  overflow: hidden;
+}
+
+/* Pixel waves */
+.waves {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.wave {
+  position: absolute;
+  width: 20px;
+  height: 4px;
+  background: #6db3f2;
+  border-radius: 0;
+}
+
+.wave-1 {
+  bottom: 30%;
+  animation: wave-drift-1 3s linear infinite;
+}
+
+.wave-2 {
+  bottom: 50%;
+  animation: wave-drift-2 4s linear infinite;
+}
+
+.wave-3 {
+  bottom: 70%;
+  animation: wave-drift-3 3.5s linear infinite;
+}
+
+@keyframes wave-drift-1 {
+  0% { left: -20px; }
+  100% { left: 100%; }
+}
+
+@keyframes wave-drift-2 {
+  0% { left: -20px; }
+  100% { left: 100%; }
+}
+
+@keyframes wave-drift-3 {
+  0% { left: -20px; }
+  100% { left: 100%; }
+}
+
+/* Pixel swimmer */
+.swimmer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 32px;
+}
+
+.swimmer-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: swim-float 2s ease-in-out infinite;
+}
+
+@keyframes swim-float {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+/* Pixel swimmer head */
+.swimmer-head {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #ffdbac;
+  top: 10px;
+  left: 24px;
+  box-shadow:
+    var(--pixel) 0 0 #ffdbac,
+    calc(var(--pixel) * 2) 0 0 #ffdbac,
+    0 var(--pixel) 0 #ffdbac,
+    var(--pixel) var(--pixel) 0 #ffdbac,
+    calc(var(--pixel) * 2) var(--pixel) 0 #ffdbac;
+}
+
+/* Pixel swimmer body */
+.swimmer-torso {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #ff6b6b;
+  top: 12px;
+  left: 12px;
+  box-shadow:
+    var(--pixel) 0 0 #ff6b6b,
+    calc(var(--pixel) * 2) 0 0 #ff6b6b,
+    0 var(--pixel) 0 #ff6b6b,
+    var(--pixel) var(--pixel) 0 #ff6b6b,
+    calc(var(--pixel) * 2) var(--pixel) 0 #ff6b6b,
+    calc(var(--pixel) * 3) var(--pixel) 0 #ff6b6b;
+}
+
+/* Pixel swimmer arms */
+.swimmer-arm {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #ffdbac;
+  top: 14px;
+}
+
+.swimmer-arm-left {
+  left: 4px;
+  animation: swim-stroke-left 1.5s ease-in-out infinite;
+  box-shadow:
+    var(--pixel) 0 0 #ffdbac,
+    calc(var(--pixel) * 2) 0 0 #ffdbac;
+}
+
+.swimmer-arm-right {
+  right: 4px;
+  animation: swim-stroke-right 1.5s ease-in-out infinite;
+  box-shadow:
+    calc(var(--pixel) * -1) 0 0 #ffdbac,
+    calc(var(--pixel) * -2) 0 0 #ffdbac;
+}
+
+@keyframes swim-stroke-left {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-8px) translateY(-4px);
+    opacity: 0.7;
+  }
+}
+
+@keyframes swim-stroke-right {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(8px) translateY(-4px);
+    opacity: 0.7;
+  }
+}
+
+/* Pixel swimmer legs */
+.swimmer-leg {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #2d1b00;
+  top: 20px;
+}
+
+.swimmer-leg-left {
+  left: 14px;
+  animation: swim-kick-pixel-left 1s ease-in-out infinite;
+  box-shadow:
+    0 var(--pixel) 0 #2d1b00;
+}
+
+.swimmer-leg-right {
+  right: 14px;
+  animation: swim-kick-pixel-right 1s ease-in-out infinite;
+  box-shadow:
+    0 var(--pixel) 0 #2d1b00;
+}
+
+@keyframes swim-kick-pixel-left {
+  0%, 100% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+}
+
+@keyframes swim-kick-pixel-right {
+  0%, 100% { transform: translateX(2px); }
+  50% { transform: translateX(-2px); }
+}
+
+/* Pixel splash effect */
+.water-splash {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: rgba(255, 255, 255, 0.6);
+  top: 12px;
+  left: 32px;
+  animation: splash-pixel 1.5s ease-in-out infinite;
+  box-shadow:
+    var(--pixel) 0 0 rgba(255, 255, 255, 0.5),
+    calc(var(--pixel) * 2) 0 0 rgba(255, 255, 255, 0.4);
+}
+
+@keyframes splash-pixel {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5);
+  }
+}
+
+/* ==================== PIGEON ANIMATION - PIXEL ART (FIXED) ==================== */
+
+.pigeon-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #87ceeb 0%, #b0e0e6 100%);
+  overflow: hidden;
+}
+
+/* Pixel clouds */
+.clouds {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.cloud {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.cloud-1 {
+  top: 20%;
+  left: 70%;
+  animation: cloud-float-1 8s linear infinite;
+  box-shadow:
+    var(--pixel) 0 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 2) 0 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 3) 0 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 4) 0 0 rgba(255, 255, 255, 0.8),
+    0 calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8),
+    var(--pixel) calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 2) calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 3) calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8);
+}
+
+.cloud-2 {
+  top: 60%;
+  left: 30%;
+  animation: cloud-float-2 10s linear infinite;
+  box-shadow:
+    var(--pixel) 0 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 2) 0 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 3) 0 0 rgba(255, 255, 255, 0.8),
+    0 calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8),
+    var(--pixel) calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 2) calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8);
+}
+
+.cloud-3 {
+  top: 80%;
+  left: 80%;
+  animation: cloud-float-3 12s linear infinite;
+  box-shadow:
+    var(--pixel) 0 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 2) 0 0 rgba(255, 255, 255, 0.8),
+    calc(var(--pixel) * 3) 0 0 rgba(255, 255, 255, 0.8),
+    0 calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8),
+    var(--pixel) calc(var(--pixel) * -1) 0 rgba(255, 255, 255, 0.8);
+}
+
+@keyframes cloud-float-1 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-120%); }
+}
+
+@keyframes cloud-float-2 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-110%); }
+}
+
+@keyframes cloud-float-3 {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-130%); }
+}
+
+/* Pixel pigeon */
+.pigeon {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  width: 48px;
+  height: 32px;
+  animation: pigeon-fly 6s ease-in-out infinite;
+}
+
+@keyframes pigeon-fly {
+  0%, 100% {
+    left: 20%;
+    top: 40%;
+    transform: translateY(0);
+  }
+  25% {
+    left: 40%;
+    top: 30%;
+    transform: translateY(-10px);
+  }
+  50% {
+    left: 60%;
+    top: 45%;
+    transform: translateY(0px);
+  }
+  75% {
+    left: 80%;
+    top: 35%;
+    transform: translateY(-8px);
+  }
+}
+
+.pigeon-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  animation: pigeon-bob 0.3s ease-in-out infinite;
+}
+
+@keyframes pigeon-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+/* Pixel pigeon head */
+.pigeon-head {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #8b7d6b;
+  top: 8px;
+  left: 28px;
+  box-shadow:
+    var(--pixel) 0 0 #8b7d6b,
+    calc(var(--pixel) * 2) 0 0 #8b7d6b,
+    0 var(--pixel) 0 #8b7d6b,
+    var(--pixel) var(--pixel) 0 #8b7d6b,
+    calc(var(--pixel) * 2) var(--pixel) 0 #ff9500,
+    calc(var(--pixel) * 3) var(--pixel) 0 #ff9500;
+}
+
+/* Pixel pigeon body */
+.pigeon-torso {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #a8a8a8;
+  top: 12px;
+  left: 16px;
+  box-shadow:
+    var(--pixel) 0 0 #a8a8a8,
+    calc(var(--pixel) * 2) 0 0 #a8a8a8,
+    calc(var(--pixel) * 3) 0 0 #a8a8a8,
+    0 var(--pixel) 0 #a8a8a8,
+    var(--pixel) var(--pixel) 0 #a8a8a8,
+    calc(var(--pixel) * 2) var(--pixel) 0 #a8a8a8,
+    calc(var(--pixel) * 3) var(--pixel) 0 #a8a8a8;
+}
+
+/* Pixel pigeon wings */
+.pigeon-wing {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #787878;
+  top: 14px;
+}
+
+.pigeon-wing-left {
+  left: 8px;
+  animation: wing-flap-left 0.3s steps(2) infinite;
+  box-shadow:
+    var(--pixel) 0 0 #787878,
+    calc(var(--pixel) * 2) 0 0 #787878,
+    0 var(--pixel) 0 #787878,
+    var(--pixel) var(--pixel) 0 #787878;
+}
+
+.pigeon-wing-right {
+  right: 8px;
+  animation: wing-flap-right 0.3s steps(2) infinite;
+  box-shadow:
+    calc(var(--pixel) * -1) 0 0 #787878,
+    calc(var(--pixel) * -2) 0 0 #787878,
+    0 var(--pixel) 0 #787878,
+    calc(var(--pixel) * -1) var(--pixel) 0 #787878;
+}
+
+@keyframes wing-flap-left {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-6px) translateX(-4px); }
+}
+
+@keyframes wing-flap-right {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-6px) translateX(4px); }
+}
+
+/* Pixel pigeon tail */
+.pigeon-tail {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #6b6b6b;
+  top: 16px;
+  left: 12px;
+  box-shadow:
+    0 var(--pixel) 0 #6b6b6b,
+    var(--pixel) var(--pixel) 0 #6b6b6b;
+}
+
+/* ==================== ROCK CLIMBING ANIMATION - PIXEL ART ==================== */
+
+.climbing-animation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #8b4513 0%, #a0522d 50%, #cd853f 100%);
+  overflow: hidden;
+}
+
+/* Pixel cliff texture */
+.cliff {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image:
+    repeating-linear-gradient(90deg,
+      transparent 0px,
+      transparent 15px,
+      rgba(139, 69, 19, 0.3) 15px,
+      rgba(139, 69, 19, 0.3) 16px
+    ),
+    repeating-linear-gradient(0deg,
+      transparent 0px,
+      transparent 15px,
+      rgba(139, 69, 19, 0.3) 15px,
+      rgba(139, 69, 19, 0.3) 16px
+    );
+}
+
+/* Pixel rock holds */
+.rock {
+  position: absolute;
+  width: calc(var(--pixel) * 2);
+  height: calc(var(--pixel) * 2);
+  background: #696969;
+  border: 2px solid #2d1b00;
+}
+
+.rock-1 {
+  top: 20%;
+  left: 35%;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.rock-2 {
+  top: 40%;
+  right: 30%;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.rock-3 {
+  top: 60%;
+  left: 40%;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.rock-4 {
+  top: 80%;
+  right: 35%;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Pixel climber */
+.climber {
+  position: absolute;
+  bottom: 15%;
+  left: 45%;
+  width: 32px;
+  height: 48px;
+  animation: climb-vertical 8s ease-in-out infinite;
+}
+
+@keyframes climb-vertical {
+  0%, 100% {
+    bottom: 15%;
+    left: 45%;
+  }
+  25% {
+    bottom: 35%;
+    left: 42%;
+  }
+  50% {
+    bottom: 55%;
+    left: 48%;
+  }
+  75% {
+    bottom: 75%;
+    left: 44%;
+  }
+}
+
+.climber-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Pixel climber head with helmet */
+.climber-head {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #ff4444;
+  top: 8px;
+  left: 14px;
+  box-shadow:
+    var(--pixel) 0 0 #ff4444,
+    calc(var(--pixel) * 2) 0 0 #ff4444,
+    0 var(--pixel) 0 #ff4444,
+    var(--pixel) var(--pixel) 0 #ffdbac,
+    calc(var(--pixel) * 2) var(--pixel) 0 #ff4444,
+    0 calc(var(--pixel) * 2) 0 #ffdbac,
+    var(--pixel) calc(var(--pixel) * 2) 0 #ffdbac,
+    calc(var(--pixel) * 2) calc(var(--pixel) * 2) 0 #ffdbac;
+}
+
+/* Pixel climber body */
+.climber-torso {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #6a5acd;
+  top: 20px;
+  left: 14px;
+  box-shadow:
+    var(--pixel) 0 0 #6a5acd,
+    calc(var(--pixel) * 2) 0 0 #6a5acd,
+    0 var(--pixel) 0 #6a5acd,
+    var(--pixel) var(--pixel) 0 #6a5acd,
+    calc(var(--pixel) * 2) var(--pixel) 0 #6a5acd,
+    0 calc(var(--pixel) * 2) 0 #6a5acd,
+    var(--pixel) calc(var(--pixel) * 2) 0 #6a5acd,
+    calc(var(--pixel) * 2) calc(var(--pixel) * 2) 0 #6a5acd;
+}
+
+/* Pixel climber arms */
+.climber-arm {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #ffdbac;
+  top: 22px;
+}
+
+.climber-arm-left {
+  left: 8px;
+  animation: climb-reach-pixel-left 2s ease-in-out infinite;
+  box-shadow:
+    0 var(--pixel) 0 #ffdbac,
+    0 calc(var(--pixel) * 2) 0 #ffdbac,
+    0 calc(var(--pixel) * 3) 0 #ffdbac;
+}
+
+.climber-arm-right {
+  right: 8px;
+  animation: climb-reach-pixel-right 2s ease-in-out infinite;
+  box-shadow:
+    0 var(--pixel) 0 #ffdbac,
+    0 calc(var(--pixel) * 2) 0 #ffdbac,
+    0 calc(var(--pixel) * 3) 0 #ffdbac;
+}
+
+@keyframes climb-reach-pixel-left {
+  0%, 100% {
+    transform: translateY(4px) translateX(0);
+  }
+  50% {
+    transform: translateY(-8px) translateX(-4px);
+  }
+}
+
+@keyframes climb-reach-pixel-right {
+  0%, 100% {
+    transform: translateY(-8px) translateX(4px);
+  }
+  50% {
+    transform: translateY(4px) translateX(0);
+  }
+}
+
+/* Pixel climber legs */
+.climber-leg {
+  position: absolute;
+  width: var(--pixel);
+  height: var(--pixel);
+  background: #2f4f4f;
+  top: 32px;
+}
+
+.climber-leg-left {
+  left: 12px;
+  animation: climb-step-pixel-left 2s ease-in-out infinite;
+  box-shadow:
+    0 var(--pixel) 0 #2f4f4f,
+    0 calc(var(--pixel) * 2) 0 #2f4f4f,
+    0 calc(var(--pixel) * 3) 0 #2f4f4f;
+}
+
+.climber-leg-right {
+  right: 12px;
+  animation: climb-step-pixel-right 2s ease-in-out infinite;
+  box-shadow:
+    0 var(--pixel) 0 #2f4f4f,
+    0 calc(var(--pixel) * 2) 0 #2f4f4f,
+    0 calc(var(--pixel) * 3) 0 #2f4f4f;
+}
+
+@keyframes climb-step-pixel-left {
+  0%, 100% {
+    transform: translateY(4px) translateX(-2px);
+  }
+  50% {
+    transform: translateY(-4px) translateX(2px);
+  }
+}
+
+@keyframes climb-step-pixel-right {
+  0%, 100% {
+    transform: translateY(-4px) translateX(2px);
+  }
+  50% {
+    transform: translateY(4px) translateX(-2px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .transport-card {
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+
+  .animation-container {
+    height: 180px;
+  }
+
+  .transport-title {
+    font-size: 0.7rem;
+  }
+
+  .transport-speed {
+    font-size: 0.5rem;
+  }
+
+  .transport-description {
+    font-size: 0.45rem;
+  }
+}

@@ -1,0 +1,73 @@
+:root {
+  font-family: 'Press Start 2P', cursive, system-ui;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  color: #a8dadc;
+  background-color: #1a1a2e;
+
+  font-synthesis: none;
+  text-rendering: optimizeSpeed;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+* {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+a {
+  font-weight: 500;
+  color: #ffd700;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #ffed4e;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #1a1a2e;
+}
+
+h1 {
+  font-size: 2em;
+  line-height: 1.6;
+}
+
+button {
+  border-radius: 0;
+  border: 3px solid #ffd700;
+  padding: 0.6em 1.2em;
+  font-size: 0.7em;
+  font-weight: 400;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #0f0f1e;
+  color: #ffd700;
+  cursor: pointer;
+  transition: all 0.1s;
+  box-shadow: 4px 4px 0px #2d1b00;
+}
+button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0px #2d1b00;
+}
+button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px #2d1b00;
+}
+button:focus,
+button:focus-visible {
+  outline: 2px solid #ffd700;
+  outline-offset: 2px;
+}
